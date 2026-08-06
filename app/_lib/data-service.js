@@ -1,6 +1,7 @@
 import { eachDayOfInterval } from "date-fns";
 import { supabase } from "./supabase";
 import { notFound } from "next/navigation";
+import countries from "@/data/countries.json";
 
 /////////////
 // GET
@@ -136,47 +137,68 @@ export async function getSettings() {
 
   return data;
 }
+// restcountries API v2
+//--------------------------------------------------------
+// export async function getCountries() {
+//   try {
+//     const res = await fetch(
+//       'https://restcountries.com/v2/all?fields=name,flag'
+//     );
+//     const countries = await res.json();
+//     return countries;
+//   } catch {
+//     throw new Error('Could not fetch countries');
+//   }
+// }
 
-function normalizeCountries(payload) {
-  const source = Array.isArray(payload)
-    ? payload
-    : Array.isArray(payload?.data)
-      ? payload.data
-      : [];
+// restcountries API v5
+//--------------------------------------------------------
+// function normalizeCountries(payload) {
+//   const source = Array.isArray(payload)
+//     ? payload
+//     : Array.isArray(payload?.data)
+//       ? payload.data
+//       : [];
 
-  return source
-    .map((country) => {
-      const name = country?.name?.common ?? country?.name ?? "";
-      const flag = country?.flag?.emoji ?? country?.flag ?? "";
+//   return source
+//     .map((country) => {
+//       const name = country?.name?.common ?? country?.name ?? "";
+//       const flag = country?.flag?.emoji ?? country?.flag ?? "";
 
-      if (!name) return null;
+//       if (!name) return null;
 
-      return { name, flag };
-    })
-    .filter(Boolean);
-}
+//       return { name, flag };
+//     })
+//     .filter(Boolean);
+// }
 
-export async function getCountries() {
-  try {
-    const res = await fetch(
-      "https://api.restcountries.com/countries/v5?response_fields=names.common,flag.emoji&pretty",
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.RESTCOUNTRIES_API_KEY ?? ""}`,
-        },
-      },
-    );
+// export async function getCountries() {
+//   try {
+//     const res = await fetch(
+//       "https://api.restcountries.com/countries/v5?response_fields=names.common,flag.emoji",
+//       {
+//         headers: {
+//           Authorization: `Bearer ${process.env.RESTCOUNTRIES_API_KEY ?? ""}`,
+//         },
+//       },
+//     );
 
-    if (!res.ok) {
-      throw new Error(`Countries request failed with status ${res.status}`);
-    }
+//     console.log("getCountries: status", res.status);
+//     const payload = await res.json();
+//     console.log("getCountries: payload", payload);
 
-    const payload = await res.json();
-    return normalizeCountries(payload);
-  } catch (err) {
-    console.error(err);
-    throw new Error("Could not fetch countries");
-  }
+//     const countries = normalizeCountries(payload);
+//     console.log("getCountries: normalized countries", countries);
+
+//     return countries;
+//   } catch (err) {
+//     console.error(err);
+//     throw new Error("Could not fetch countries");
+//   }
+// }
+
+export function getCountries() {
+  return countries;
 }
 
 /////////////
