@@ -4,7 +4,6 @@ import { getCountries } from "@/app/_lib/data-service";
 
 function SelectCountry({ defaultCountry, name, id, className }) {
   const countries = getCountries();
-  // console.log("Countries:", countries);
   const flag =
     countries.find((country) => country.name === defaultCountry)?.flag ?? "";
 
