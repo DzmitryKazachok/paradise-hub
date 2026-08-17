@@ -40,20 +40,13 @@ function DateSelector({ settings, bookedDates, cabin }) {
         mode="range"
         onSelect={setRange}
         selected={displayRange}
-        min={minBookingLength + 1}
+        min={minBookingLength}
         max={maxBookingLength}
         navLayout="around"
-        /*disabled={{
-          before: new Date(),
-          // after: addYears(new Date(), 1),
-        }}*/
         disabled={(curDate) =>
           isPast(curDate) ||
           bookedDates.some((date) => isSameDay(date, curDate))
         }
-        // fromMonth={new Date()}
-        // fromDate={new Date()}
-        // toYear={new Date().getFullYear() + 5}
         captionLayout="dropdown"
         startMonth={new Date()} //The earliest month available in the dropdown
         endMonth={addYears(new Date(), 5)} //The latest month available in the dropdown

@@ -3,7 +3,7 @@ import { auth } from "@/app/_lib/auth";
 import { getBookings } from "@/app/_lib/data-service";
 
 export const metadata = {
-  tiltle: "Reservations | Paradise Hub",
+  tiltle: "Reservations | The Paradise Hub",
 };
 
 export default async function Page() {

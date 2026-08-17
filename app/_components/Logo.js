@@ -10,10 +10,10 @@ function Logo() {
         height="60"
         width="60"
         quality={100}
-        alt="Paradise Hub logo"
+        alt="The Paradise Hub logo"
       />
       <span className="text-xl font-semibold text-primary-100">
-        Paradise Hub
+        The Paradise Hub
       </span>
     </Link>
   );

@@ -4,7 +4,7 @@ import { auth } from "@/app/_lib/auth";
 import { getGuest } from "@/app/_lib/data-service";
 
 export const metadata = {
-  tiltle: "Update profile | Paradise Hub",
+  tiltle: "Update profile | The Paradise Hub",
 };
 
 export default async function Page() {
